@@ -1,4 +1,6 @@
 # Discord-Rat
+The file is available only in italian
+
 
 A rat that uses discord server (discord bot and a discord webhook) as console, obviously it uses discord also as proxy.
 
