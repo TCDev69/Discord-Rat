@@ -9,6 +9,8 @@ This rat work only on windows
 First of explicate every single rat command: DON'T USE THIS FOR MAKE ANY BULLSHIT, I DO NOT TAKE ANY RESPONSIBILITY IN THE WAY YOU USE IT.
 
 
+modify the line 1 and 2 with your bot token and webhook url
+
 
 
 bomb - fills the pc with garbage files
