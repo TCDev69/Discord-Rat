@@ -9,8 +9,6 @@ import os
 import requests
 import pyautogui as pglib
 from sys import platform as osys
-import sounddevice as sdlib
-from scipy.io.wavfile import write
 from random import randint
 pglib.FAILSAFE = False
 
