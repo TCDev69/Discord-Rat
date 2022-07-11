@@ -120,7 +120,7 @@ sendmsg Hello (will send Hello to the victim machine) also here if there are spa
 
 shutdown - it will permanently delete the rat from the victim machine without leaving any traces
 
-shutdown bot (bot is the only paremeter)
+shutdown bot (bot is the only paremeter) - work in progress
 
 
 so - will send on discord the operation system of victim machine (pretty unuseful because this rat works only on windows)
