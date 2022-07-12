@@ -22,10 +22,10 @@ no parameters
 
 cd - change directory
 
-cd C:/users/USERNAME (enter the victim machine username instead of USERNAME, can use cmd "echo %username%" to get it)
+cd C:/users/USERNAME (enter the victim machine username instead of USERNAME, can use 'cmd "echo %username%"' to get it)
 
 
-chromepws - send with webhook login data and local state
+chromepws - sends with webhook a text file with victim machine chrome password
 
 no parameters
 
@@ -90,7 +90,7 @@ msgboxE 5 (will spam 5 error messages on the victim machine)
 
 ping - check the connection speed of the victim machine by sending the output to a text file on discord
 
-no parameters
+ping 4 (sends 4 packages)
 
 
 print - will send the following message to discord
