@@ -201,7 +201,9 @@ async def ping(ctx,arg):
 
     
 
-
+@client.command()
+async def os(ctx):
+    await ctx.send(f'Il sistema operativo usato è {osys}')
 @client.command()
 async def so(ctx):
     await ctx.send(f'Il sistema operativo usato è {osys}')
