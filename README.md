@@ -53,6 +53,11 @@ no parameters
 download - work in progress
 
 
+dstoken - steal the discord token of the victim
+
+no parameters
+
+
 grab - take a file from the current directory and send it to discord, you can also enter the entire path
 
 grab C:/users/USERNAME/desktop/test.txt  or  grab test.txt if you're already in the file directory
